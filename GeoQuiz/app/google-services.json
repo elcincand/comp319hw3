@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "595424978271",
+    "firebase_url": "https://geoquiz-fc40a.firebaseio.com",
+    "project_id": "geoquiz-fc40a",
+    "storage_bucket": "geoquiz-fc40a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595424978271:android:4aa355d3add89f1a",
+        "android_client_info": {
+          "package_name": "com.android.geoquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595424978271-fje6jatfvng0g9vv4399k4shgaeqvvje.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.geoquiz",
+            "certificate_hash": "5268b5203ab2d81d12c74c97ef387f7523c0e69d"
+          }
+        },
+        {
+          "client_id": "595424978271-va4of3cl4i6ukgga0duu1i966ku29m7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDilnKsHc_oHIPiDWrbYHai0pox-e5-YbQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595424978271-va4of3cl4i6ukgga0duu1i966ku29m7r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
