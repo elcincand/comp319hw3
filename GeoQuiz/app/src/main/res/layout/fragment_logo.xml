@@ -29,6 +29,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
+            android:hint="Username"
+
             android:textColor="@color/DimGray"
             />
         <EditText
@@ -37,6 +39,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
+            android:hint="Password"
             android:textColor="@color/DimGray"
             />
 

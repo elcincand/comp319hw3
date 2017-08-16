@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Iterator;
 
@@ -41,8 +47,8 @@ public class SignUpFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         sign = (Button) view.findViewById(R.id.signsign);
         musernamefield= (EditText) view.findViewById(R.id.signusername);
-        mnamefield= (EditText) view.findViewById(R.id.signusername);
-        mlastnamefield= (EditText) view.findViewById(R.id.signusername);
+        mnamefield= (EditText) view.findViewById(R.id.signname);
+        mlastnamefield= (EditText) view.findViewById(R.id.signlastname);
 
         mpasswordfield = (EditText) view.findViewById(R.id.signpass);
 
@@ -50,7 +56,7 @@ public class SignUpFragment extends Fragment {
         sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //createUser();
+                createUser();
                 LogoFragment fragment = new LogoFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -90,7 +96,7 @@ public class SignUpFragment extends Fragment {
 
         return lastElement;
     }
-   /* public void createUser() {
+   public void createUser() {
         mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://geoquiz-fc40a.firebaseio.com/");
 
 
@@ -110,7 +116,7 @@ public class SignUpFragment extends Fragment {
                 String pass = mpasswordfield.getText().toString();
 
                 User users = new User(username, name, surname, pass);
-                mDatabase.child("kitchens").child(String.valueOf(currID)).setValue(users);
+                mDatabase.child("users").child(String.valueOf(currID)).setValue(users);
 
             }
 
@@ -121,6 +127,6 @@ public class SignUpFragment extends Fragment {
         });
 
 
-    }*/
+    }
 
 }
