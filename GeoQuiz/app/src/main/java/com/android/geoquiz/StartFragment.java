@@ -26,6 +26,9 @@ public class StartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (container != null) {
+            container.removeAllViews();
+        }
         View view = inflater.inflate(R.layout.fragment_start, container, false);
 
         startButton = (ImageButton) view.findViewById(R.id.startButton);

@@ -77,20 +77,20 @@ public class LogoFragment extends Fragment {
 
     public void loginUser() {
 
-
-        DatabaseReference mlogRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://geoquiz-fc40a.firebaseio.com//users");
+        DatabaseReference mlogRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://geoquiz-fc40a.firebaseio.com/users/");
         mlogRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 logtext = mUserView.getText().toString();
                 String logpass = mUserPass.getText().toString();
-
 
                 if (dataSnapshot.child(logtext).exists()) {
 
                     if (dataSnapshot.child(logtext).child("password").getValue().toString().equals(logpass)) {
                         Intent i = new Intent(getActivity(), MainActivity.class);
                         startActivity(i);
+
                     }else {
 
                         Toast.makeText(getActivity(), "Wrong password!",

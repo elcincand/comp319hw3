@@ -28,90 +28,98 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-                mtoolbar = (Toolbar) findViewById(R.id.toolbar);
-                setSupportActionBar(mtoolbar);
+        mtoolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mtoolbar);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+
+        mDrawerLayout.setDrawerListener(mToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-                mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-                mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.main_container, new MainFragment());
+        fragmentTransaction.commit();
+        getSupportActionBar().setTitle("Geo Quiz");
 
-                mDrawerLayout.setDrawerListener(mToggle);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.add(R.id.main_container, new MainFragment());
-                fragmentTransaction.commit();
-                getSupportActionBar().setTitle("Geo Quiz");
-
-                navigationView = (NavigationView) findViewById(R.id.navigation_view);
-                navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-
-                            case R.id.myinventory:
-                                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction.add(R.id.main_container, new MainFragment());
-                                fragmentTransaction.commit();
-                                getSupportActionBar().setTitle("My Inventory");
-                                item.setChecked(true);
-                                mDrawerLayout.closeDrawers();
-
-                                break;
-                           /* case R.id.myimprovement:
-                                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction.add(R.id.main_container, new ImprovementFragment());
-                                fragmentTransaction.commit();
-                                getSupportActionBar().setTitle("My Savings");
-                                item.setChecked(true);
-                                mDrawerLayout.closeDrawers();
-
-                                break;
-                            case R.id.myshoplist:
-                                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction.add(R.id.main_container, new ShoppingFragment());
-                                fragmentTransaction.commit();
-                                getSupportActionBar().setTitle("My Shopping List");
-                                item.setChecked(true);
-                                mDrawerLayout.closeDrawers();
-                                break;
-                            case R.id.nav_notification:
-                                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction.add(R.id.main_container, new ShoppingFragment());
-                                fragmentTransaction.commit();
-                                getSupportActionBar().setTitle("My Shopping List");
-                                item.setChecked(true);
-                                mDrawerLayout.closeDrawers();
-                                break;*/
-                            case R.id.nav_search:
-
-                                item.setChecked(true);
-                                mDrawerLayout.closeDrawers();
-                                break;
-                            case R.id.nav_logout:
-                                Intent i = new Intent (getApplicationContext(), AuthenticationActivity.class);
-                                startActivity(i);
-                                item.setChecked(true);
-                                mDrawerLayout.closeDrawers();
-                                break;
-                            case R.id.nav_settings:
-
-                                item.setChecked(true);
-                                mDrawerLayout.closeDrawers();
-                                break;
-
-                        }
-
-
-                        return true;
-                    }
-                });
-
-            }
-
-
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+
+                    case R.id.anasayfa:
+                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.add(R.id.main_container, new MainFragment());
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setTitle("Home");
+                        item.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.profile:
+                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.add(R.id.main_container, new ProfileFragment());
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setTitle("My Profile");
+                        item.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+
+                        break;
+                    case R.id.quizgame:
+                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.add(R.id.main_container, new StartFragment());
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setTitle("Quiz Game");
+                        item.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+
+                        break;
+                    case R.id.friendslist:
+                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.add(R.id.main_container, new FriendFragment());
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setTitle("My Friends");
+                        item.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.toprank:
+                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.add(R.id.main_container, new RankingFragment());
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setTitle("Top 10 Players");
+                        item.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_search:
+
+                        item.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_logout:
+                        Intent i = new Intent(getApplicationContext(), AuthenticationActivity.class);
+                        startActivity(i);
+                        item.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_settings:
+
+                        item.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+                        break;
+
+                }
+
+
+                return true;
+            }
+        });
+
+    }
+
+
+
+    @Override
             public void onPostCreate(Bundle savedInstanceState) {
                 super.onPostCreate(savedInstanceState);
                 mToggle.syncState();

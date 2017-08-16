@@ -28,6 +28,9 @@ public class ScoreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (container != null) {
+            container.removeAllViews();
+        }
         View view = inflater.inflate(R.layout.fragment_score, container, false);
 
             retry = (ImageButton) view.findViewById(R.id.retryButton);
@@ -53,7 +56,7 @@ public class ScoreFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                LogoFragment fragment = new LogoFragment();
+                MainFragment fragment = new MainFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.main_container, fragment);

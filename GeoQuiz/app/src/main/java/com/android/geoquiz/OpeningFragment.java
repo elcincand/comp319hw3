@@ -26,6 +26,9 @@ public class OpeningFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (container != null) {
+            container.removeAllViews();
+        }
         View view = inflater.inflate(R.layout.fragment_opening, container, false);
 
         login = (Button) view.findViewById(R.id.login);

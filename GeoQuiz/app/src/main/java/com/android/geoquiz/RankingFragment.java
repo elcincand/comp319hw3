@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment {
+public class RankingFragment extends Fragment {
 
 
-    public MainFragment() {
+    public RankingFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,8 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         if (container != null) {
             container.removeAllViews();
-        }        return inflater.inflate(R.layout.fragment_main, container, false);
+        }
+        return inflater.inflate(R.layout.fragment_ranking, container, false);
     }
 
 }
