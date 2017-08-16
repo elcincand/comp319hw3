@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+    <item android:id="@+id/myinventory"
+        android:title="My Inventory"/>
+
+    <item android:id="@+id/myshoplist"
+        android:title="My Shopping List"/>
+
+    <item android:id="@+id/myimprovement"
+        android:title="My Savings"/>
+
+
+    <item android:id="@+id/nav_notification"
+        android:title="Notifications" />
+
+    <item android:id="@+id/nav_search"
+        android:title="Search"/>
+
+    <item android:id="@+id/nav_settings"
+        android:title="Settings"/>
+
+    <item android:id="@+id/nav_logout"
+        android:title="Logout"/>
+</menu>

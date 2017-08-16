@@ -18,7 +18,7 @@
             android:id="@+id/imageView"
             android:layout_width="213dp"
             android:layout_height="0dp"
-            android:layout_weight="0.39"
+            android:layout_weight="0.70"
             android:paddingBottom="30dp"
             app:srcCompat="@drawable/logo" />
 
@@ -31,15 +31,33 @@
             android:inputType="textPersonName"
             android:textColor="@color/DimGray"
             />
+        <EditText
+            android:id="@+id/passwordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textColor="@color/DimGray"
+            />
+
 
 
         <Button
-            android:id="@+id/next_button"
+            android:id="@+id/loglog"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Login" />
+
+
+        <TextView
+            android:id="@+id/doyou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="5dp"
-            android:drawableRight="@drawable/arrow_right"
-            android:text="@string/next_button" />
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:text="Don't you have an account yet?" />
+
 
     </LinearLayout>
 
