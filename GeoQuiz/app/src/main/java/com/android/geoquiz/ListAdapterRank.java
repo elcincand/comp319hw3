@@ -1,6 +1,8 @@
 package com.android.geoquiz;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +24,15 @@ public class ListAdapterRank extends ArrayAdapter<DataModelRank> implements View
     Context mContextRank;
     DatabaseReference mRankRef;
 
-    @Override
-    public void onClick(View view) {
 
-    }
 
 
     // View lookup cache
     private static class ViewHolderRank{
-        TextView txtuserrank;
+        TextView txtusernamerank;
         TextView txtuserscore;
+        TextView txtnamerank;
+        TextView txtlastnamerank;
         ImageButton addfriendrank;
 
     }
@@ -42,13 +43,13 @@ public class ListAdapterRank extends ArrayAdapter<DataModelRank> implements View
         this.mContextRank=context;
         this.fragmentranking = fragmentranking;
     }
-/*
+
     @Override
     public void onClick(View v) {
 
         final int position=(Integer) v.getTag();
         Object object= getItem(position);
-        DataModelFriend dataModel=(DataModelFriend)object;
+        DataModelRank dataModelRank =(DataModelRank)object;
 
         switch (v.getId())
         {
@@ -61,13 +62,13 @@ public class ListAdapterRank extends ArrayAdapter<DataModelRank> implements View
                 adb2.setNegativeButton("Cancel", null);
                 adb2.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        fragment.addShopListBasic(position);
+                        fragmentranking.addFriendList(position);
                     }
                 });
                 adb2.show();
                 break;
         }
-    }*/
+    }
 
     private int lastPosition = -1;
 
@@ -85,8 +86,10 @@ public class ListAdapterRank extends ArrayAdapter<DataModelRank> implements View
             viewHolderRank = new ListAdapterRank.ViewHolderRank();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.ranklistrow, parent, false);
-            viewHolderRank.txtuserscore = (TextView) convertView.findViewById(R.id.name);
-            viewHolderRank.txtuserrank = (TextView) convertView.findViewById(R.id.tuketim);
+            viewHolderRank.txtuserscore = (TextView) convertView.findViewById(R.id.rankscore);
+            viewHolderRank.txtnamerank = (TextView) convertView.findViewById(R.id.rankname);
+            viewHolderRank.txtusernamerank = (TextView) convertView.findViewById(R.id.rankusername);
+            viewHolderRank.txtlastnamerank = (TextView) convertView.findViewById(R.id.rankscore);
 
             viewHolderRank.addfriendrank = (ImageButton) convertView.findViewById(R.id.addfriendrank);
 
@@ -104,8 +107,10 @@ public class ListAdapterRank extends ArrayAdapter<DataModelRank> implements View
         // result.startAnimation(animation);
         lastPosition = position;
 
-        viewHolderRank.txtuserrank.setText(dataModelRank.getUserrank());
-        viewHolderRank.txtuserscore.setText(dataModelRank.getUserscore());
+        viewHolderRank.txtusernamerank.setText(dataModelRank.getUsernamerank());
+        viewHolderRank.txtnamerank.setText(dataModelRank.getNamerank());
+        viewHolderRank.txtlastnamerank.setText(dataModelRank.getLastnamescore());
+        viewHolderRank.txtuserscore.setText(dataModelRank.getScorerank());
 
         viewHolderRank.addfriendrank.setOnClickListener(this);
         viewHolderRank.addfriendrank.setTag(position);

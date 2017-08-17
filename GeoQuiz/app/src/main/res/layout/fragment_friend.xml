@@ -37,7 +37,7 @@
 
 
         <ListView
-            android:id="@+id/food"
+            android:id="@+id/friend"
             android:layout_width="300dp"
             android:layout_height="115dp"
             android:contextClickable="true"

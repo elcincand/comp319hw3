@@ -1,6 +1,9 @@
 package com.android.geoquiz;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -17,17 +21,10 @@ import java.util.ArrayList;
  */
 
 public class ListAdapterFriend extends ArrayAdapter<DataModelFriend> implements View.OnClickListener{
-    private FriendFragment fragment;
+    private FriendFragment friendfragment;
     private ArrayList<DataModelFriend> dataSetFriend;
     Context mContextFriend;
     DatabaseReference mFriendRef;
-    DatabaseReference mshopRef;
-
-    @Override
-    public void onClick(View view) {
-
-
-    }
 
 
     // View lookup cache
@@ -36,19 +33,19 @@ public class ListAdapterFriend extends ArrayAdapter<DataModelFriend> implements 
         TextView txtfriendlastname;
         TextView txtfriendusername;
         TextView txtfriendhighscore;
-
-
         ImageButton remove;
+        ImageButton challenge;
+
 
     }
 
-    public ListAdapterFriend(ArrayList<DataModelFriend> data, Context context, FriendFragment fragment) {
+    public ListAdapterFriend(ArrayList<DataModelFriend> data, Context context, FriendFragment friendfragment) {
         super(context, R.layout.friendlistrow, data);
         this.dataSetFriend = data;
         this.mContextFriend=context;
-        this.fragment = fragment;
+        this.friendfragment = friendfragment;
     }
-/*
+
     @Override
     public void onClick(View v) {
 
@@ -58,9 +55,10 @@ public class ListAdapterFriend extends ArrayAdapter<DataModelFriend> implements 
 
         switch (v.getId())
         {
-            case R.id.item_remove:
-                mshopRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://sanalmutfak-d81ad.firebaseio.com/kitchens/"
-                        + LoginFragment.logkitchen + "/shoplist");
+            case R.id.friend_remove:
+                mFriendRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://geoquiz-fc40a.firebaseio.com/users/"
+                        + LogoFragment.logtext + "/friends/");
+                Log.d("test", "hello");
 
                 AlertDialog.Builder adb = new AlertDialog.Builder(getContext());
                 adb.setTitle("Delete?");
@@ -68,35 +66,27 @@ public class ListAdapterFriend extends ArrayAdapter<DataModelFriend> implements 
                 adb.setNegativeButton("Cancel", null);
                 adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        fragment.removeItemBasic(position);
+                        Log.d("test", "hellob");
+                        friendfragment.removeFriend(position);
                     }
                 });
                 adb.show();
 
                 break;
 
-            case R.id.item_addshop:
 
-                AlertDialog.Builder adb2 = new AlertDialog.Builder(getContext());
-                adb2.setTitle("Add to shopping list?");
-                adb2.setMessage("Are you sure you want to add this item to the shopping list?");
-                adb2.setNegativeButton("Cancel", null);
-                adb2.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        fragment.addShopListBasic(position);
-                    }
-                });
-                adb2.show();
+            case R.id.friend_challenge:
                 break;
+
         }
-    }*/
+    }
 
     private int lastPosition = -1;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        DataModelFriend dataModelbasic = getItem(position);
+        DataModelFriend dataModelFriend = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolderFriend viewHolderFriend; // view lookup cache stored in tag
 
@@ -112,7 +102,8 @@ public class ListAdapterFriend extends ArrayAdapter<DataModelFriend> implements 
             viewHolderFriend.txtfriendusername = (TextView) convertView.findViewById(R.id.friendusername);
             viewHolderFriend.txtfriendhighscore = (TextView) convertView.findViewById(R.id.friendscore);
 
-            viewHolderFriend.remove = (ImageButton) convertView.findViewById(R.id.item_remove);
+            viewHolderFriend.remove = (ImageButton) convertView.findViewById(R.id.friend_remove);
+            viewHolderFriend.challenge = (ImageButton) convertView.findViewById(R.id.friend_challenge);
 
             result=convertView;
 
@@ -125,13 +116,15 @@ public class ListAdapterFriend extends ArrayAdapter<DataModelFriend> implements 
 
         lastPosition = position;
 
-        viewHolderFriend.txtfriendName.setText(dataModelbasic.getFriendName());
+        viewHolderFriend.txtfriendName.setText(dataModelFriend.getFriendName());
+        viewHolderFriend.txtfriendlastname.setText(dataModelFriend.getFriendlastname());
+        viewHolderFriend.txtfriendusername.setText(dataModelFriend.getFriendusername());
+        viewHolderFriend.txtfriendhighscore.setText(dataModelFriend.getFriendhighscore());
+        viewHolderFriend.remove.setOnClickListener(this);
+        viewHolderFriend.remove.setTag(position);
 
         viewHolderFriend.remove.setOnClickListener(this);
         viewHolderFriend.remove.setTag(position);
-        // Return the completed view to render on screen
-
-
 
         return convertView;
     }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +91,7 @@ public class LogoFragment extends Fragment {
                     if (dataSnapshot.child(logtext).child("password").getValue().toString().equals(logpass)) {
                         Intent i = new Intent(getActivity(), MainActivity.class);
                         startActivity(i);
+                        Log.d("logtest", logtext);
 
                     }else {
 

@@ -11,7 +11,7 @@ public class DataModelFriend {
     String friendhighscore;
 
 
-    public DataModelFriend(String friendNamedata, String friendlastnamedata, String friendusernamedata, String friendhighscoredata) {
+    public DataModelFriend(String friendusernamedata, String friendNamedata, String friendlastnamedata,  String friendhighscoredata) {
 
         this.friendName=friendNamedata;
         this.friendlastname=friendlastnamedata;

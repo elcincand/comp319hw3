@@ -3,13 +3,20 @@ package com.android.geoquiz;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +27,19 @@ import java.util.List;
  */
 public class FriendFragment extends Fragment {
 
-    private ImageButton madd;
-    private ListView mfood;
-    private String tempKey2;
+    private ImageButton mremovefriend;
+    private ListView mfriends;
+    private String tempKeyfriend;
     ArrayList<DataModelFriend> dataModelsfriend = new ArrayList<DataModelFriend>();
-    private List<String> keyarray = new ArrayList<>();
+    private List<String> keyarrafriend = new ArrayList<>();
+
 
     private ListAdapterFriend adapterfriend;
 
-    DatabaseReference mbasicRef;
-    DatabaseReference mDatabaseShop;
-    public static String sname;
+    DatabaseReference mfriendRef;
+    DatabaseReference mDatabaseFriend;
+
+    public static String friendname;
 
     public FriendFragment() {
         // Required empty public constructor
@@ -44,47 +53,44 @@ public class FriendFragment extends Fragment {
             container.removeAllViews();
         }
             View view = inflater.inflate(R.layout.fragment_friend, container, false);
-            mfood = (ListView) view.findViewById(R.id.food);
-            // mbozuk = (ListView) view.findViewById(R.id.bozuk);
-        //    madd = (ImageButton) view.findViewById(R.id.foodAddButton);
+            mfriends = (ListView) view.findViewById(R.id.friend);
+           mremovefriend = (ImageButton) view.findViewById(R.id.friend_remove);
 
 
-
-
-           // displayFood();
+            displayFriends();
 
             return view;
         }
 
-/*
 
-    public void displayFood(){
-        mbasicRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://sanalmutfak-d81ad.firebaseio.com/kitchens/"
-                + LogoFragment.logkitchen + "/foods/");
-        mbasicRef.orderByChild("skt");
+    public void displayFriends(){
+        mfriendRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://geoquiz-fc40a.firebaseio.com/users/"
+                + LogoFragment.logtext + "/friends/");
 
-        adapterbasic = new ListAdapterBasic(dataModelsBasic, getActivity(), BasicFragment.this);
-        mfood.setAdapter(adapterbasic);
+        adapterfriend = new ListAdapterFriend(dataModelsfriend, getActivity(), FriendFragment.this);
+        mfriends.setAdapter(adapterfriend);
 
-        mbasicRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        mfriendRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
 
-                    String bname = (String) childSnapShot.child("foodname").getValue();
-                    String bskt = (String) childSnapShot.child("skt").getValue();
-                    // String but = (String) childSnapShot.child("ut").getValue();
-
-                    tempKey2 = dataSnapshot.child(childSnapShot.getKey()).getKey().toString();
-                    Log.d("keditemp", tempKey2);
-
-                    keyarray.add(tempKey2);
-                    Log.d("kedi", String.valueOf(keyarray));
+                    String friendusername = (String) childSnapShot.child("username").getValue();
+                  //  String friendname = (String) childSnapShot.child("name").getValue();
+                   // String friendlastname = (String) childSnapShot.child("surname").getValue();
+                    String friendscore= (String) childSnapShot.child("highscore").getValue();
 
 
-                    dataModelsBasic.add(new DataModelBasic(bname, bskt));
-                    mbasicRef.orderByChild("skt");
-                    adapterbasic.notifyDataSetChanged();
+                    tempKeyfriend = dataSnapshot.child(childSnapShot.getKey()).getKey().toString();
+                    Log.d("keditemp", tempKeyfriend);
+
+                    keyarrafriend.add(tempKeyfriend);
+                    Log.d("kedi", String.valueOf(keyarrafriend));
+
+
+                    dataModelsfriend.add(new DataModelFriend(friendusername, friendname, null,null));
+                    mfriendRef.orderByChild("friendscore");
+                    adapterfriend.notifyDataSetChanged();
 
                 }
             }
@@ -97,13 +103,13 @@ public class FriendFragment extends Fragment {
     }
 
 
-    public void removeItemBasic(int position) {
-        DataModelBasic toRemovebasic = adapterbasic.getItem(position);
-        adapterbasic.remove(toRemovebasic);
-        adapterbasic.notifyDataSetChanged();
-        Log.d("kediremove", keyarray.get(position));
-        mbasicRef.child(keyarray.get(position)).removeValue();
-        BasicFragment fragment = new BasicFragment();
+    public void removeFriend(int position) {
+        DataModelFriend toRemovefriend = adapterfriend.getItem(position);
+        adapterfriend.remove(toRemovefriend);
+        adapterfriend.notifyDataSetChanged();
+        Log.d("kediremove", keyarrafriend.get(position));
+        mfriendRef.child(keyarrafriend.get(position)).removeValue();
+        FriendFragment fragment = new FriendFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_container, fragment);
@@ -112,61 +118,10 @@ public class FriendFragment extends Fragment {
 
     }
 
-    public <T> T getLastElement(final Iterable<T> elements) {
-        Iterator<T> itr = elements.iterator();
-        T lastElement = null;
-
-        while(itr.hasNext()) {
-            lastElement=itr.next();
-        }
-
-        return lastElement;
-    }
-
-    public void addShopListBasic(final int position){
-
-        mbasicRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String a = keyarray.get(position);
-                sname = (String) dataSnapshot.child(a).child("foodname").getValue();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
 
 
-        mDatabaseShop = FirebaseDatabase.getInstance().getReference();
-
-
-        Query lastQuery2 =mDatabaseShop.child("kitchens").child(String.valueOf(LoginFragment.logkitchen)).child("shoplist");
-
-        lastQuery2.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                DataSnapshot shoplist = getLastElement(dataSnapshot.getChildren());
-                int shopid = 0;
-                if(shoplist != null){
-                    shopid = Integer.parseInt(shoplist.getKey()) + 1;
-                }
-                Log.d("kedishopid", String.valueOf(shopid));
-
-                String a = keyarray.get(position);
-                mDatabaseShop.child("kitchens").child(String.valueOf(LoginFragment.logkitchen))
-                        .child("shoplist").child(String.valueOf(shopid)) //child("foodname")
-                        .setValue(sname);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //Handle possible errors.
-            }
-        });
-
+    public void invitePlay(){
 
     }
-*/
+
 }

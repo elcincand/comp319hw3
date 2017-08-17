@@ -5,22 +5,34 @@ package com.android.geoquiz;
  */
 
 public class DataModelRank {
-    String userrank;
-    String userscore;
+    String usernamerank;
+    String scorerank;
+    String namerank;
+    String lastnamescore;
 
+    public DataModelRank(String usernametop, String userlastnametop, String nametop , String scoretop) {
 
-    public DataModelRank(String userranktop, String userscoretop) {
+        this.usernamerank=usernametop;
+        this.scorerank=userlastnametop;
+        this.namerank=nametop;
+        this.lastnamescore=scoretop;
 
-        this.userrank=userranktop;
-        this.userscore=userscoretop;
 
     }
 
-    public String getUserrank() {
-        return userrank;
+    public String getUsernamerank() {
+        return usernamerank;
     }
 
-    public String getUserscore() {
-        return userscore;
+    public String getScorerank() {
+        return scorerank;
+    }
+
+    public String getNamerank() {
+        return namerank;
+    }
+
+    public String getLastnamescore() {
+        return lastnamescore;
     }
 }

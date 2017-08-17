@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.main_container, new MainFragment());
+        fragmentTransaction.add(R.id.main_container, new RankingFragment());
         fragmentTransaction.commit();
         getSupportActionBar().setTitle("Geo Quiz");
 
@@ -49,14 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
 
-                    case R.id.anasayfa:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.add(R.id.main_container, new MainFragment());
-                        fragmentTransaction.commit();
-                        getSupportActionBar().setTitle("Home");
-                        item.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        break;
+
                     case R.id.profile:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.add(R.id.main_container, new ProfileFragment());

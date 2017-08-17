@@ -56,7 +56,7 @@ public class ScoreFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainFragment fragment = new MainFragment();
+                ProfileFragment fragment = new ProfileFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.main_container, fragment);
