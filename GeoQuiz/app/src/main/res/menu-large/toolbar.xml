@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:balloonberry="http://schemas.android.com/apk/res-auto">
+
+
+
+<item
+        android:id="@+id/action_search"
+        android:orderInCategory="100"
+        balloonberry:showAsAction="always"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:title="Search" />
+
+    <item
+        android:id="@+id/action_playnow"
+        android:orderInCategory="100"
+        balloonberry:showAsAction="always"
+        android:icon="@drawable/ic_play_circle_outline_white_24dp"
+        android:title="Play Now"/>
+
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        balloonberry:showAsAction="always"
+        android:icon="@drawable/ic_power_settings_new_white_24dp"
+        android:title="Log out" />
+
+
+</menu>

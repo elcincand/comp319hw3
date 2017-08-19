@@ -82,7 +82,7 @@ public class ProfileFragment extends Fragment {
                         musernameprofile.setText(pusername);
                         mnameprofile.setText(pname);
                         mlastnameprofile.setText(plastname);
-                        highscore.setText(pscore);
+                        highscore.setText("HighScore: "+ pscore);
                         mpassprofile.setText(ppass);
 
 
@@ -98,7 +98,8 @@ public class ProfileFragment extends Fragment {
             changeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //savechanges();
+
+                    savechanges();
                 }
             });
 

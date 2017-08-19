@@ -57,8 +57,8 @@ public class ListAdapterRank extends ArrayAdapter<DataModelRank> implements View
             case R.id.addfriendrank:
 
                 AlertDialog.Builder adb2 = new AlertDialog.Builder(getContext());
-                adb2.setTitle("Add to shopping list?");
-                adb2.setMessage("Are you sure you want to add this item to the shopping list?");
+                adb2.setTitle("Add to friend's list?");
+                adb2.setMessage("Are you sure you want to add this person to your friend's list?");
                 adb2.setNegativeButton("Cancel", null);
                 adb2.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -103,8 +103,7 @@ public class ListAdapterRank extends ArrayAdapter<DataModelRank> implements View
         }
 
 
-        //Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-        // result.startAnimation(animation);
+
         lastPosition = position;
 
         viewHolderRank.txtusernamerank.setText(dataModelRank.getUsernamerank());

@@ -57,7 +57,7 @@
         android:layout_alignParentEnd="true" />
 
     <ImageButton
-        android:id="@+id/friend_challenge"
+        android:id="@+id/rank_challenge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_play_circle_outline_black_24dp"

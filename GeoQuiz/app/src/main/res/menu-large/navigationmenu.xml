@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
 
     <item android:id="@+id/profile"
+        android:textSize="30dp"
         android:title="My Profile"/>
 
 
     <item android:id="@+id/quizgame"
+        android:textSize="50dp"
         android:title="Quiz Game"/>
 
     <item android:id="@+id/friendslist"
+        android:textSize="50dp"
         android:title="Friends"/>
 
 
     <item android:id="@+id/toprank"
+        android:textSize="50dp"
         android:title="Top Ranking" />
 
 

@@ -15,23 +15,27 @@
 
         <ImageView
             android:id="@+id/imageView10"
-            android:layout_width="300dp"
-            android:layout_height="250dp"
+            android:layout_width="397dp"
+            android:layout_height="252dp"
             app:srcCompat="@drawable/logo"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="100dp"
+            android:layout_weight="0.23" />
 
 
         <Button
             android:id="@+id/login"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
+            android:layout_width="400dp"
+            android:layout_height="70dp"
+            android:textSize="20dp"
             android:text="LOG IN" />
 
         <Button
             android:id="@+id/signup"
-            android:layout_width="225dp"
-            android:layout_height="wrap_content"
+            android:layout_width="400dp"
+            android:layout_height="70dp"
             android:layout_marginTop="30dp"
+            android:textSize="20dp"
+
             android:text="Sign Up" />
 
     </LinearLayout>

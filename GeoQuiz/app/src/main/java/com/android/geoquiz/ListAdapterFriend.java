@@ -62,11 +62,10 @@ public class ListAdapterFriend extends ArrayAdapter<DataModelFriend> implements 
 
                 AlertDialog.Builder adb = new AlertDialog.Builder(getContext());
                 adb.setTitle("Delete?");
-                adb.setMessage("Are you sure you want to delete this item?");
+                adb.setMessage("Are you sure you want to delete this friend?");
                 adb.setNegativeButton("Cancel", null);
                 adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("test", "hellob");
                         friendfragment.removeFriend(position);
                     }
                 });

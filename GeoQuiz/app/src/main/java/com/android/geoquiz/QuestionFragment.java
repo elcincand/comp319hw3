@@ -26,6 +26,7 @@ public class QuestionFragment extends Fragment {
     private Button mBButton;
     private Button mCButton;
     private Button mDButton;
+    private Button puandummy;
     private Button mNextButton;
     public int questionCount = 10;
     int pn;
@@ -37,10 +38,9 @@ public class QuestionFragment extends Fragment {
 
 
     public static int mScore;
-
+    DatabaseHelper mydb;
     private boolean running;
     private boolean isRunning;
-
 
 
     public QuestionFragment() {
@@ -52,8 +52,9 @@ public class QuestionFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_question, container, false);
 
+        mydb= new DatabaseHelper(getContext());
 
-
+        //addData();
 
         mScoreView = (TextView) view.findViewById(R.id.score);
         mQuestionTextView = (TextView) view.findViewById(R.id.question_text_view);
@@ -267,6 +268,7 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                  pn = dataSnapshot.getValue(Integer.class);
+                // puandummy.setText(pn);
 
 
             }
@@ -344,7 +346,26 @@ public class QuestionFragment extends Fragment {
         savedInstanceState.putBoolean("isRunning", isRunning);
     }
 
+/*
+    public void addData(){
+        Log.d("addData", "adddataquiz");
+        boolean isInserted =  mydb.insertData(CategoryFragment.category.toString(),
+                QuizFragment.quiz,
+                mQuestionTextView.getText().toString(),
+                mAButton.getText().toString(),
+                mBButton.getText().toString(),
+                mCButton.getText().toString(),
+                mDButton.getText().toString(),
+               puandummy.getText().toString() );
+        if (isInserted = true) {
+            Log.d("intert", "success");
+        }else{
+            Log.d("intert", "fail");
 
+        }
+
+    }
+    */
 
 }
 
